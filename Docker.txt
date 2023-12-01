@@ -1,17 +1,63 @@
 docker pull <imagen>
-docker container ls
+docker container ls // Paa ver los contenedores corriendo
+docker container ls -a // Para ver todos los contenedores
 docker container rm <container ID>
 docker container prun // elimina todos los contenedores
 docker image rm <image Name>
 docker run -d <imagen> // Desenlazado de la consola
 docker container stop <container ID>
 docker run -dp <puerto> <imagen>
-docker container rm -f <conainer ID|> // Borra el contenedor
+docker container rm -f <container ID|> // Borra el contenedor
 docker image rm <image Name>
-docker conainer run \
+docker container run \
 --name postgres-alpha \
 -e POSTGRES_PASSWORD=mypass1 \
 -dp 5432:5432 \
-postgres
+postgres:<version de la imagen>
 
+docker container logs <container ID>
+docker volume create world-db
+ docker volume rm // Para borrar un volumen
+
+docker container run \
+--name postgres-alpha \
+-e POSTGRES_PASSWORD=mypass1 \
+-dp 5432:5432 \
+--volume <nombre Volumen>:/var/lib/mysql \
+postgres:<version de la imagen>
+
+// para montar phpmyadmin
+docker container run \
+--name phpmyadmin \
+-d \
+-e PMA_ARBITRARY=1 \
+-p 8080:80 \
+phpmyadmin:<version>
+
+// Para que varios contenedores puedan hablar entre ellos se crea una red
+docker network ls
+docker network inspect <nombre-red>
+docker network prune // para purgar todas las redes
+docker network create <nombre-red>
+docker network connect <nombre-red> <contenedor-ID>
+
+// para montar un contenedor con una red
+docker container run \
+--name postgres-alpha \
+-e POSTGRES_PASSWORD=mypass1 \
+-dp 5432:5432 \
+--volume <nombre Volumen>:/var/lib/mysql \
+-- network <nombre-red> \
+postgres:<version de la imagen>
+
+// Enlace de carpeta y correr comando de instalacion. (Nota es como si hiciera mvn clean install)
+docker container run \
+--name nest-app \
+-w /app \
+-p 80:3000 \
+-v "$(pwd)":/app \
+node:<version> \
+sh -c "yarn install && yarn start:dev"
+
+docker exec -it <contenedor-ID> /bin/sh // Esto me permite entrar al shell del contenedor
 
