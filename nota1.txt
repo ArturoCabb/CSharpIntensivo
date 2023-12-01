@@ -1,0 +1,45 @@
+Las operaciones asyncronas se utiliza async
+Para suspender el hilo sin bloqueralo usamos await, 
+por lo que lo liberamos de tener que esperar a que termine la tarea
+
+Task genera promesas que van a terminar en el futurpo 
+y puedo decirle await para que se vaya a otra parte a ahcer lo que tiene que hacer
+
+Task es para quienes no retornan un valor y Task<T> es para los que retornan un valor
+Await me permite esperar la conclusion
+
+TaskWhenAll es para que se pueda esperar a que todo termine
+
+Throttling es para controlar el flujo de las cosas
+
+IProgress nos permite disparar un evento cada vez que courre algo
+
+Timeout se utiliza para cancelar una operacion despues de un tiempo determinado
+
+ConfigureAwait
+
+ValueTask: la mision es de performance, es un struct, métdo asincrónioc casi siempre sincrónico
+método usado con mucha frecuencia
+
+Es importante hacer Dispose al CancellationTokenSource
+A los timer siempre hay que hacerle dispose para así liberar recursos
+
+Los métodos atómicos pueden ser utilizados comodamente en ambientes multihilos, 
+porque garantizan determinismo
+No se puede ver el estado intermedio del hilo, puede funcionar exitosamente o falla completamente
+locks nos permite bloquear una pieza de código, también puedo utilizar multihilos
+Las funciones puras devuen el mismo valor apra los mismos objetos
+La condicion de carrera se da cuando hay una variable compartida por varios hilos 
+y dichos hilos quieren modificarla variable de manera simultanea
+Interlock
+
+Los locks pueden tener un bloque de código el cual solamente se va a ejecutar por un hilo a la vez
+Se utilizan cuando se realizan varias operaciones no cubiertas por interlock
+Deben ser rápidos
+
+ThreadStatic se utiliza para indicar que un campo es único para cada hilo
+
+LINQ es para colecciones
+PLINQ es lo mismo pero paralelo
+
+

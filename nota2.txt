@@ -1,0 +1,12 @@
+Los modulos son una clase con el decorador NgModule
+Componentes es una clase decorada con el decorador @Componente
+Bindings de eventos
+Bindings de propiedad
+Directivas ayudan a transformar los elementos de la plantilla HTML
+Las directivas estructurales son las que alteran las etiquetas HTML o el DOM de nuestra pagina
+Las directivas de atributo son las que cambian la apariencia o comportamiento de elementos exitentes en nuesta plantilla
+Pipes permiten transformar data de un formato a otro
+Servicios para compartir data o lógica que no se asocia especificamente con un componente
+Ruteo permite navegacion
+
+Los hook son los que manejan el ciclo de vida de un componente

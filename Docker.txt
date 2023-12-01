@@ -1,0 +1,17 @@
+docker pull <imagen>
+docker container ls
+docker container rm <container ID>
+docker container prun // elimina todos los contenedores
+docker image rm <image Name>
+docker run -d <imagen> // Desenlazado de la consola
+docker container stop <container ID>
+docker run -dp <puerto> <imagen>
+docker container rm -f <conainer ID|> // Borra el contenedor
+docker image rm <image Name>
+docker conainer run \
+--name postgres-alpha \
+-e POSTGRES_PASSWORD=mypass1 \
+-dp 5432:5432 \
+postgres
+
+
