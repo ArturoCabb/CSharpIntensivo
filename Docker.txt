@@ -60,4 +60,84 @@ node:<version> \
 sh -c "yarn install && yarn start:dev"
 
 docker exec -it <contenedor-ID> /bin/sh // Esto me permite entrar al shell del contenedor
+docker compose up // dónde está el yml para iniciar a correrlo
+docker compose down // Borra todo
+// Por si algo ocurre
+sudo chown -R 5050:5050 pgadmin
+
+docker buildx
+
+docker build --tag <nombre> ./
+
+// Se puede crear un docker compose que guarde un yml como el siguiente
+// nombre docker-compose.yml
+version: '3'
+services:
+db:
+	container_name: postgres_database
+	image: postgres:15.1
+	volumes:
+		#- postgres-db:/var/lib/postgresql/data #Ejemplo
+		- ./postgres:/var/lib/postgresql/data
+	environment:
+		- POSTGRES_PASSWORD=123456
+		
+	pgAdmin:
+		depends_on:
+			- serviceName
+		image: imageName
+		ports:
+			- "8080:80
+		volumes:
+			- ./pgadmin:/var/lib/pgadmin
+		environment:
+			- PGADMIN_DEFAULT_PASSWORD=123456
+			- PGADMIN_DEFAULT_EMAIL=@emal.com
+volumes:
+	<nombre-volumen>:
+	// Si ya existe el volumen
+	external: true
+	
+// el env es para las variables de entorno
+// Otro ejemplo con mongo
+version: '3'
+services:
+	db:
+		container_name: ${MONGO_DB_NAME}
+		image: mongo:6.0
+		volumes:
+			- poke-vol:/data/db
+		ports:
+			- 27017:27017
+		restart: always
+		environment:
+			-<variable de entorno>: <nombre-variable-entorno>
+		command: ['--auth']
+		
+	mongo-express:
+		depends_on:
+			-db
+		image: mongo-express:<version>
+		environment:
+			ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_USERNAME}
+		ports:
+			-8080:8081
+		restart: always
+			
+volumes:
+	poke-vol:
+		external: false
+		
+// En el archivo .env que es para las variables de entorno
+MONGO_USERNAME=
+MONGO_PASSWORD=
+MONGO_DB_NAME=
+
+// dockerfile
+FROM <imagen-que-importamos>
+
+WORKFIR /app
+COPY source dest
+RUN <comando a ejecutar>
+CMD ["<comando-ejecutar>", "<por-si-ingresa-parametros>"]
 
